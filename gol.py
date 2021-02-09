@@ -1,3 +1,4 @@
+import time
 import random
 import logging
 
@@ -134,9 +135,18 @@ def next_state(state):
 
     return next_state
 
-state = random_state(5, 4)
 
-render_state(state)
+def run(w, h):
+    dead  = dead_state(w, h)
+    state = random_state(w, h)
+    while True:
+        if state == dead:
+            render_state(state)
+            break
+        render_state(state)
+        state = next_state(state)
+        time.sleep(0.1)
 
-render_state(next_state(state))
+if __name__ == '__main__':
+    run(5, 5)
 
